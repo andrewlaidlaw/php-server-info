@@ -1,0 +1,7 @@
+{
+    "name": "server-info/app",
+    "description": "Look up information about Power servers",
+    "require": {
+       "guzzlehttp/guzzle": "^7.0"
+    }
+ }
