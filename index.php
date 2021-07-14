@@ -3,8 +3,8 @@ require_once('functions.php');
 require_once('page-header.php');
 require('vendor/autoload.php');
 
-// Opening page
-echo '<h2 class="ds-heading-2 ds-col-10">Server Info</h2>
+// Display title and description
+echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 <p class="ds-col-10 ds-margin-bottom-2">Search for a server model by machine type / model:</p>
 ';
 
