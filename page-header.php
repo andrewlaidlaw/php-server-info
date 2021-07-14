@@ -11,7 +11,7 @@
     </head>
   <body class="ds-has-sticky-footer">
     <div class="ds-grid">
-      <div class="ds-row ds-bg-blue-4 ds-col-12 ds-text-align-left">
+      <div class="ds-row ds-bg-blue-6 ds-col-12 ds-text-align-left">
           <div class="ds-col-10 ds-offset-1">
               <img src="./power-logo.png" width=33% class="ds-padding-0" alt="IBM Power">
           </div>
