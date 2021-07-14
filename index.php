@@ -9,10 +9,18 @@ echo '<h1>Server Info</h1>
 ';
 
 // Create form that provides data for this page to process
-echo '<form action="index.php" method="post">
-<label for="model">Model:</label><input type="text" name="model">
-<label for="type">Type:</label><input type="text" name="type"><br />
-<input type="submit" label="Look Up">
+echo '
+<form action="index.php" method="post">
+<div class="ds-input-container ds-col-6 ds-mar-b-2">
+    <label for="model" class="ds-input-label">Model:</label>
+    <input type="text" class="ds-input" name="model" placeholder="9117">
+</div>
+<div class="ds-input-container ds-col-6 ds-mar-b-2">
+    <label for="type" class="ds-input-label">Type:</label>
+    <input type="text" class="ds-input" name="type" placeholder="MMD">
+</div>
+<div class="ds-input-container ds-col-12 ds-mar-b-2">
+<input type="submit" class="ds-button ds-primary ds-text-align-center" label="Look Up">
 </form>
 ';
 
@@ -23,7 +31,8 @@ $modelType = $model . '-' . $type;
 if($model && $type) {
 
     // Simple response
-    echo '<p>Machine Type / Model is: ' . $modelType . '</p>
+    echo '<p class="ds-heading-5">Machine Type / Model is: ' . $modelType . '</p>
+    <div class="ds-hr ds-mar-b-2_5"></div>
     ';
 
     // Section to create table of rPerf and CPW figures
@@ -34,7 +43,8 @@ if($model && $type) {
     $content = $rperfresponse->getBody();
     $servers = json_decode($content, false);
     drawTable($servers);
-    echo '</p>';
+    echo '</p>
+    ';
 
     // Section to provide a link to the sales manual
     $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/']);
