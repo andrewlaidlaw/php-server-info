@@ -21,7 +21,8 @@ echo '
     <input type="text" class="ds-input" name="type" placeholder="MMD">
 </div>
 <div class="ds-input-container ds-col-3">
-    <input type="submit" class="ds-button ds-primary ds-text-align-center" value="Look up server">
+    <label for="submit" class="ds-input-label"> </label>
+    <input type="submit" name="submit" class="ds-button ds-primary ds-text-align-center" value="Look up server">
 </div>
 </form>
 </div>
