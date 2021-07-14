@@ -13,7 +13,7 @@ function drawLine($server) {
 }
 
 function drawTable($servers) {
-    echo '<div class="ds-table-container">
+    echo '<div class="ds-table-container ds-col-10">
     <table class="ds-table ds-table-compact ds-striped ds-hover">
     ';
     echo '<tr><th>Cores</th><th>CPW</th><th>rPerf ST</th><th>rPerf SMT2</th><th>rPerf SMT4</th><th>rPerf SMT8</th></tr>
@@ -26,7 +26,7 @@ function drawTable($servers) {
 }
 
 function renderDates($dates) {
-    echo '<div class="ds-table-container">
+    echo '<div class="ds-table-container ds-col-10">
     <table class="ds-table ds-table-compact ds-striped">
     ';
     echo '<tr><th>Announcement</th><th>General Availability</th><th>Withdrawn from Marketing</th><th>End of Support</th></tr>

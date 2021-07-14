@@ -11,11 +11,11 @@
     </head>
   <body class="ds-has-sticky-footer">
     <div class="ds-grid">
-      <div class="ds-row ds-bg-blue-primary-4 ds-col-xs-12 ds-col-lg-12 ds-col-xl-12 ds-text-align-center">
-          <div class="ds-col-xs-10 ds-offset-xs-1">
+      <div class="ds-row ds-bg-blue-4 ds-col-12 ds-text-align-left">
+          <div class="ds-col-10 ds-offset-1">
               <img src="./power-logo.png" width=33% class="ds-padding-bottom-1" alt="IBM Power">
           </div>
       </div>
       <div class="ds-row">
-        <div class="ds-col-10">
+        <div class="ds-col-10 ds-offset-1">
           <div class="ds-row ds-pad-t-3">
