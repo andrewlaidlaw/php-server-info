@@ -5,7 +5,7 @@ require('vendor/autoload.php');
 
 // Opening page
 echo '<h2 class="ds-heading-2 ds-col-8">Server Info</h2>
-<p class="ds-col-8">Search for a server model by machine type / model:</p>
+<p class="ds-col-8 ds-margin-bottom-2">Search for a server model by machine type / model:</p>
 ';
 
 // Create form that provides data for this page to process
@@ -21,14 +21,14 @@ echo '
     <input type="text" class="ds-input" name="type" placeholder="MMD">
 </div>
 <div class="ds-input-container ds-col-8">
-    <input type="submit" class="ds-button ds-primary ds-text-align-center" label="Look Up">
+    <input type="submit" class="ds-button ds-primary ds-text-align-center" value="Look up server">
 </div>
 </form>
 </div>
 ';
 
-$model = $_POST['model'];
-$type = $_POST['type'];
+$model = substr($_POST['model'],0,4);
+$type = strtoupper(substr($_POST['type'],0,4));
 $modelType = $model . '-' . $type;
 
 if($model && $type) {
