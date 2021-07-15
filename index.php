@@ -13,11 +13,11 @@ echo '
 <div class="ds-row">
 <form action="index.php" method="post">
 <div class="ds-input-container ds-col-3">
-    <label for="model" class="ds-input-label">Model:</label>
+    <label for="model" class="ds-input-label">Machine type:</label>
     <input type="text" class="ds-input" name="model" placeholder="9117">
 </div>
 <div class="ds-input-container ds-col-3">
-    <label for="type" class="ds-input-label">Type:</label>
+    <label for="type" class="ds-input-label">Model:</label>
     <input type="text" class="ds-input" name="type" placeholder="MMD">
 </div>
 <div class="ds-input-container ds-col-3">
@@ -26,10 +26,11 @@ echo '
 </div>
 </form>
 </div>
+<div class="ds-row">
 ';
 
 $model = substr($_POST['model'],0,4);
-$type = strtoupper(substr($_POST['type'],0,4));
+$type = strtoupper(substr($_POST['type'],0,3));
 $modelType = $model . '-' . $type;
 
 if($model && $type) {
@@ -70,7 +71,17 @@ if($model && $type) {
     renderDates($dates);
     echo '</div>';
 
+} else {
+    echo '<div class="ds-pad-b-3">Please enter a machine type and model number to get information about:
+        <ul class="ds-list-icon ds-offset-1 ds-col-6">
+            <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Performance figures for variants (CPW and rPerf)</li>
+            <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Dates for announcement, availability, withdrawal, and end of service</li>
+            <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>A link to the sales manual for the server</li>
+        </ul>
+    </div>';
 }
+
+echo '</div>';
 
 // Add footer from template
 require_once('page-footer.php');
