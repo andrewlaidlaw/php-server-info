@@ -65,7 +65,7 @@ if($model && $type) {
     // Add logic to provide some level of error checking - ie 'Missing' response to sales manual lookup
     
     // Simple response
-    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . '</h2>
+    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . ' - Generation: ' . parseGeneration($servers[0]->architecture) . '</h2>
     <div class="ds-hr ds-mar-b-2"></div>
     ';
 

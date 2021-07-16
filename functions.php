@@ -36,4 +36,42 @@ function renderDates($dates) {
     echo '</table></div>';
 }
 
+function parseGeneration($architecture) {
+    switch($architecture) {
+        case "p4_":
+            echo "POWER4";
+            break;
+        case "p4+":
+            echo "POWER4+";
+            break;
+        case "p5_":
+            echo "POWER5";
+            break;
+        case "p5+":
+            echo "POWER5+";
+            break;
+        case "p6_":
+            echo "POWER6";
+            break;
+        case "p6+":
+            echo "POWER6+";
+            break;
+        case "p7_":
+            echo "POWER7";
+            break;
+        case "p7+":
+            echo "POWER7+";
+            break;
+        case "p8":
+            echo "POWER8";
+            break;
+        case "p9":
+            echo "POWER9";
+            break;
+        case "p10":
+            echo "Power10";
+            break;
+    }
+}
+
 ?>
