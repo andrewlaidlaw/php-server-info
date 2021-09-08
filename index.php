@@ -49,15 +49,15 @@ if($model && $type) {
     $servers = json_decode($content, false);
 
     // Get the sales manual link
-    $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/']);
-    $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
-    $smurl = $smresponse->getBody();
+    // $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/']);
+    // $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
+    // $smurl = $smresponse->getBody();
 
     // Then use that to get the dates
-    $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
-    $srresponse = $srclient->request('GET', '?url=' . $smurl);
-    $srdetails = $srresponse->getBody();
-    $dates = json_decode($srdetails,false);
+    // $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
+    // $srresponse = $srclient->request('GET', '?url=' . $smurl);
+    // $srdetails = $srresponse->getBody();
+    // $dates = json_decode($srdetails,false);
 
     // Now we can render our page
 
@@ -70,10 +70,10 @@ if($model && $type) {
     ';
 
     //Section to provide information on important dates
-    echo '<h3 class="ds-heading-3">Important Dates</h3>
-    <div class="ds-pad-b-3">';
-    renderDates($dates);
-    echo '</div>';
+    // echo '<h3 class="ds-heading-3">Important Dates</h3>
+    // <div class="ds-pad-b-3">';
+    // renderDates($dates);
+    // echo '</div>';
 
     // Section to create table of rPerf and CPW figures
     echo '<h3 class="ds-heading-3">Performance Figures</h3>
@@ -83,19 +83,28 @@ if($model && $type) {
     ';
 
     // Section to provide a link to the sales manual
-        echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
-    <div class="ds-pad-b-3">
-    <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
-    </div>
-    ';
+    //     echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
+    // <div class="ds-pad-b-3">
+    // <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
+    // </div>
+    // ';
+
+// // If we don't have both machine type and model, provide instructions
+// } else {
+//     echo '<div class="ds-pad-b-3">Please enter a machine type and model number to get information about:
+//         <ul class="ds-list-icon ds-offset-1 ds-col-8">
+//             <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Dates for announcement, availability, withdrawal, and end of service</li>
+//             <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Performance figures for variants (CPW and rPerf)</li>
+//             <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>A link to the sales manual for the server</li>
+//         </ul>
+//     </div>';
+// }
 
 // If we don't have both machine type and model, provide instructions
 } else {
     echo '<div class="ds-pad-b-3">Please enter a machine type and model number to get information about:
         <ul class="ds-list-icon ds-offset-1 ds-col-8">
-            <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Dates for announcement, availability, withdrawal, and end of service</li>
             <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Performance figures for variants (CPW and rPerf)</li>
-            <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>A link to the sales manual for the server</li>
         </ul>
     </div>';
 }
