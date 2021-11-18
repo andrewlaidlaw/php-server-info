@@ -49,15 +49,15 @@ if($model && $type) {
     $servers = json_decode($content, false);
 
     // Get the sales manual link
-    // $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/']);
-    // $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
-    // $smurl = $smresponse->getBody();
+    $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/lookup']);
+    $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
+    $smurl = $smresponse->getBody();
 
     // Then use that to get the dates
-    // $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
-    // $srresponse = $srclient->request('GET', '?url=' . $smurl);
-    // $srdetails = $srresponse->getBody();
-    // $dates = json_decode($srdetails,false);
+    $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
+    $srresponse = $srclient->request('GET', '?url=' . $smurl);
+    $srdetails = $srresponse->getBody();
+    $dates = json_decode($srdetails,false);
 
     // Now we can render our page
 
@@ -70,10 +70,10 @@ if($model && $type) {
     ';
 
     //Section to provide information on important dates
-    // echo '<h3 class="ds-heading-3">Important Dates</h3>
-    // <div class="ds-pad-b-3">';
-    // renderDates($dates);
-    // echo '</div>';
+    echo '<h3 class="ds-heading-3">Important Dates</h3>
+    <div class="ds-pad-b-3">';
+    renderDates($dates);
+    echo '</div>';
 
     // Section to create table of rPerf and CPW figures
     echo '<h3 class="ds-heading-3">Performance Figures</h3>
@@ -83,11 +83,11 @@ if($model && $type) {
     ';
 
     // Section to provide a link to the sales manual
-    //     echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
-    // <div class="ds-pad-b-3">
-    // <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
-    // </div>
-    // ';
+    echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
+    <div class="ds-pad-b-3">
+    <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
+    </div>
+    ';
 
 // // If we don't have both machine type and model, provide instructions
 // } else {
