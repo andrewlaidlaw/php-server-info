@@ -2,7 +2,7 @@
 
 function drawLine($server) {
     echo '<tr>';
-    echo '<td>' . $server->totalCores . ' at ' . $server->frequencyGHz . ' GHz (' . $server->sockets . ' sockets x ' . $server->coresPerSocket ' cores)</td>';
+    echo '<td>' . $server->totalCores . ' at ' . $server->frequencyGHz . ' GHz (' . $server->sockets . ' sockets x ' . $server->coresPerSocket . ' cores)</td>';
     echo '<td>' . $server->CPW . '</td>';
     echo '<td>' . $server->rperfSMT1 . '</td>';
     echo '<td>' . $server->rperfSMT2 . '</td>';
