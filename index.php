@@ -10,9 +10,6 @@ echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 
 // Create form that provides data for this page to process
 echo '
-<div id="pageloader">
-   <img src="loading_icon.gif" alt="processing..." />
-</div>
 <div class="ds-row">
 <form id="lookupform" action="index.php" method="post">
 <div class="ds-input-container ds-col-3">
@@ -43,7 +40,7 @@ $modelType = $model . '-' . $type;
 // Only proceed if a machine type and model number were provided
 if($model && $type) {
 
-    // Collect the date from various sources
+    // Collect the data from various sources
 
     // Start with the performance numbers
     $rperfclient = new GuzzleHttp\Client([ 'base_uri'=>'http://nodejs-mongodb-reader:8080/']);
@@ -102,15 +99,6 @@ if($model && $type) {
         </ul>
     </div>';
 }
-
-// If we don't have both machine type and model, provide instructions
-// } else {
-//     echo '<div class="ds-pad-b-3">Please enter a machine type and model number to get information about:
-//         <ul class="ds-list-icon ds-offset-1 ds-col-8">
-//             <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Performance figures for variants (CPW and rPerf)</li>
-//         </ul>
-//     </div>';
-// }
 
 echo '</div>';
 

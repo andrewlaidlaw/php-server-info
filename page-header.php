@@ -12,6 +12,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     </head>
   <body class="ds-has-sticky-footer">
+    <div id="pageloader">
+      <img src="loading_icon.gif" alt="processing..." />
+    </div>
     <div class="ds-grid">
       <div class="ds-row ds-bg-blue-6 ds-col-12 ds-text-align-left">
           <div class="ds-col-10 ds-offset-1">
