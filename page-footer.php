@@ -11,6 +11,13 @@
         </h5>
       </div>
     </footer>
+    <script>
+    $(document).ready(function(){
+      $("#lookupform").on("submit", function(){
+        $("#pageloader").fadeIn();
+      });
+    });
+    </script>
     <script src="https://w3.ibm.com/w3ds/cdn/latest/w3ds.js"></script>
   </body>
 </html>

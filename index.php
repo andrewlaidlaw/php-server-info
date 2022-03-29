@@ -10,8 +10,11 @@ echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 
 // Create form that provides data for this page to process
 echo '
+<div id="pageloader">
+   <img src="loading_icon.gif" alt="processing..." />
+</div>
 <div class="ds-row">
-<form action="index.php" method="post">
+<form id="lookupform" action="index.php" method="post">
 <div class="ds-input-container ds-col-3">
     <label for="model" class="ds-input-label">Machine type:</label>
     <input type="text" class="ds-input" name="model" placeholder="9117">

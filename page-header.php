@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="https://www.ibm.com/favicon.ico" />
     <title>Power Server information</title>
     <link rel="stylesheet" href="https://w3.ibm.com/w3ds/cdn/latest/w3ds.css" type="text/css">
+    <link rel="stylesheet" href="pageloader.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     </head>
   <body class="ds-has-sticky-footer">
     <div class="ds-grid">
