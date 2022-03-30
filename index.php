@@ -53,41 +53,51 @@ if($model && $type) {
     $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
     $smurl = $smresponse->getBody();
 
-    // Then use that to get the dates
-    $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
-    $srresponse = $srclient->request('GET', '?url=' . $smurl);
-    $srdetails = $srresponse->getBody();
-    $dates = json_decode($srdetails,false);
-
+    if($smurl == "Not Found") {
+        $smfound = false;
+    } else {
+        $smfound = true;
+        // Then use that to get the dates
+        $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
+        $srresponse = $srclient->request('GET', '?url=' . $smurl);
+        $srdetails = $srresponse->getBody();
+        $dates = json_decode($srdetails,false);
+    }
     // Now we can render our page
-
-    // TODO
-    // Add logic to provide some level of error checking - ie 'Missing' response to sales manual lookup
     
     // Simple response
-    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . ' - Generation: ' . parseGeneration($servers[0]->architecture) . '</h2>
+    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . '</h2>
+    <h3 class="ds-heading-3>Generation: ' . parseGeneration($servers[0]->architecture) . '</h3>
     <div class="ds-hr ds-mar-b-2"></div>
     ';
 
-    //Section to provide information on important dates
-    echo '<h3 class="ds-heading-3">Important Dates</h3>
-    <div class="ds-pad-b-3">';
-    renderDates($dates);
-    echo '</div>';
+    if($smfound == false) {
+        echo '<h3 class="ds-heading-3">Server not found</h3>
+        <div class="ds-pad-b-3>
+        We could not find a server with the machine type and model: ' . $modelType . '. Please check the details for the server you are looking for and try again.
+        </div>
+        ';
+    } else {
+        //Section to provide information on important dates
+        echo '<h3 class="ds-heading-3">Important Dates</h3>
+        <div class="ds-pad-b-3">';
+        renderDates($dates);
+        echo '</div>';
 
-    // Section to create table of rPerf and CPW figures
-    echo '<h3 class="ds-heading-3">Performance Figures</h3>
-    <div class="ds-pad-b-3">';
-    drawTable($servers);
-    echo '</div>
-    ';
+        // Section to create table of rPerf and CPW figures
+        echo '<h3 class="ds-heading-3">Performance Figures</h3>
+        <div class="ds-pad-b-3">';
+        drawTable($servers);
+        echo '</div>
+        ';
 
-    // Section to provide a link to the sales manual
-    echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
-    <div class="ds-pad-b-3">
-    <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
-    </div>
-    ';
+        // Section to provide a link to the sales manual
+        echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
+        <div class="ds-pad-b-3">
+        <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
+        </div>
+        ';
+    }
 
 // // If we don't have both machine type and model, provide instructions
 } else {
