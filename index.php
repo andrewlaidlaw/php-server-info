@@ -67,7 +67,7 @@ if($model && $type) {
     
     // Simple response
     echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . '</h2>
-    <h3 class="ds-heading-3>Generation: ' . parseGeneration($servers[0]->architecture) . '</h3>
+    <h3 class="ds-heading-3">Generation: ' . parseGeneration($servers[0]->architecture) . '</h3>
     <div class="ds-hr ds-mar-b-2"></div>
     ';
 
