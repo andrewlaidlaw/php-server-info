@@ -73,10 +73,17 @@ if($model && $type) {
 
     if($smfound == false) {
         echo '<h3 class="ds-heading-3">Server not found</h3>
-        <div class="ds-pad-b-3>
-        We could not find a server with the machine type and model: ' . $modelType . '. Please check the details for the server you are looking for and try again.
+        <div class="ds-pad-b-3">
+        We could not find a server with the machine type and model: <b>' . $modelType . '</b>. Please check the details for the server you are looking for and try again.
         </div>
         ';
+        echo '<div class="ds-pad-b-3">Please enter a valid machine type and model number to get information about:
+            <ul class="ds-list-icon ds-offset-1 ds-col-8">
+                <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Dates for announcement, availability, withdrawal, and end of service</li>
+                <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>Performance figures for variants (CPW and rPerf)</li>
+                <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>A link to the sales manual for the server</li>
+            </ul>
+        </div>';
     } else {
         //Section to provide information on important dates
         echo '<h3 class="ds-heading-3">Important Dates</h3>
