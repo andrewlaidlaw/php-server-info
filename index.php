@@ -53,7 +53,7 @@ if($model && $type) {
     $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
     $smurl = $smresponse->getBody();
 
-    if($smurl == "Not Found") {
+    if($smurl == "Not found") {
         $smfound = false;
     } else {
         $smfound = true;
