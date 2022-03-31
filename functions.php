@@ -71,6 +71,8 @@ function parseGeneration($architecture) {
         case "p10":
             return "Power10";
             break;
+        default:
+            return "Unknown";
     }
 }
 

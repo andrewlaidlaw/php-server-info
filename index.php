@@ -8,17 +8,22 @@ echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 <p class="ds-col-10 ds-margin-bottom-2">Search for a server model by machine type / model:</p>
 ';
 
+// Collect data passed in through POST from form above and tidy
+$model = substr($_POST['model'],0,4);
+$type = strtoupper(substr($_POST['type'],0,3));
+$modelType = $model . '-' . $type;
+
 // Create form that provides data for this page to process
 echo '
 <div class="ds-row">
 <form id="lookupform" action="index.php" method="post">
 <div class="ds-input-container ds-col-3">
     <label for="model" class="ds-input-label">Machine type:</label>
-    <input type="text" class="ds-input" name="model" placeholder="9117">
+    <input type="text" class="ds-input" name="model" placeholder="' . $model . '">
 </div>
 <div class="ds-input-container ds-col-3">
     <label for="type" class="ds-input-label">Model:</label>
-    <input type="text" class="ds-input" name="type" placeholder="MMD">
+    <input type="text" class="ds-input" name="type" placeholder="' . $type . '">
 </div>
 <div class="ds-input-container ds-col-3">
     <label for="submit" class="ds-input-label">&nbsp;</label>
@@ -28,11 +33,6 @@ echo '
 </div>
 <div class="ds-row">
 ';
-
-// Collect data passed in through POST from form above and tidy
-$model = substr($_POST['model'],0,4);
-$type = strtoupper(substr($_POST['type'],0,3));
-$modelType = $model . '-' . $type;
 
 // TODO
 // Add logic to check the machine type and model (4 digit number, 3 character alphanumeric)
@@ -52,6 +52,7 @@ if($model && $type) {
     $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/lookup']);
     $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
     $smurl = $smresponse->getBody();
+    $generation = parseGeneration($servers[0]->architecture);
 
     if($smurl == "Not found") {
         $smfound = false;
@@ -66,9 +67,12 @@ if($model && $type) {
     // Now we can render our page
     
     // Simple response
-    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' - Machine Type / Model: ' . $modelType . '</h2>
-    <h3 class="ds-heading-3">Generation: ' . parseGeneration($servers[0]->architecture) . '</h3>
-    <div class="ds-hr ds-mar-b-2"></div>
+    echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' (' . $modelType . ')</h2>
+    ';
+    if ($generation != "Unknown") {
+        echo '<h3 class="ds-heading-3">Generation: ' . $generation . '</h3>';
+    }
+    echo '<div class="ds-hr ds-mar-b-2 ds-col-10"></div>
     ';
 
     if($smfound == false) {
@@ -91,12 +95,14 @@ if($model && $type) {
         renderDates($dates);
         echo '</div>';
 
-        // Section to create table of rPerf and CPW figures
-        echo '<h3 class="ds-heading-3">Performance Figures</h3>
-        <div class="ds-pad-b-3">';
-        drawTable($servers);
-        echo '</div>
-        ';
+        if (count($servers) != 0) {
+            // Section to create table of rPerf and CPW figures
+            echo '<h3 class="ds-heading-3">Performance Figures</h3>
+            <div class="ds-pad-b-3">';
+            drawTable($servers);
+            echo '</div>
+            ';
+        }
 
         // Section to provide a link to the sales manual
         echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
