@@ -8,10 +8,6 @@ echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 <p class="ds-col-10 ds-margin-bottom-2">Search for a server model by machine type / model:</p>
 ';
 
-// Set defaults
-$model = "9117";
-$type = "MMD";
-
 // Collect data passed in through POST from form above and tidy
 $model = substr($_POST['model'],0,4);
 $type = strtoupper(substr($_POST['type'],0,3));
@@ -23,11 +19,11 @@ echo '
 <form id="lookupform" action="index.php" method="post">
 <div class="ds-input-container ds-col-3">
     <label for="model" class="ds-input-label">Machine type:</label>
-    <input type="text" class="ds-input" name="model" placeholder="' . $model . '">
+    <input type="text" class="ds-input" name="model" placeholder="9117" value="' . $model . '">
 </div>
 <div class="ds-input-container ds-col-3">
     <label for="type" class="ds-input-label">Model:</label>
-    <input type="text" class="ds-input" name="type" placeholder="' . $type . '">
+    <input type="text" class="ds-input" name="type" placeholder="MMD" value="' . $type . '">
 </div>
 <div class="ds-input-container ds-col-3">
     <label for="submit" class="ds-input-label">&nbsp;</label>
