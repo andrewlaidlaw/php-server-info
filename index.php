@@ -8,6 +8,10 @@ echo '<h2 class="ds-heading-1 ds-col-10">Server Info</h2>
 <p class="ds-col-10 ds-margin-bottom-2">Search for a server model by machine type / model:</p>
 ';
 
+// Set defaults
+$model = "9117";
+$type = "MMD";
+
 // Collect data passed in through POST from form above and tidy
 $model = substr($_POST['model'],0,4);
 $type = strtoupper(substr($_POST['type'],0,3));
@@ -54,6 +58,7 @@ if($model && $type) {
     $smurl = $smresponse->getBody();
     $generation = parseGeneration($servers[0]->architecture);
 
+    // If we can't find the sales manual entry, skip other data lookups
     if($smurl == "Not found") {
         $smfound = false;
     } else {
@@ -69,12 +74,17 @@ if($model && $type) {
     // Simple response
     echo '<h2 class="ds-heading-2">Server: ' . $servers[0]->commonName . ' (' . $modelType . ')</h2>
     ';
+
+    // Only show the generation if this is known
     if ($generation != "Unknown") {
         echo '<h3 class="ds-heading-3">Generation: ' . $generation . '</h3>';
     }
+
+    // Draw a ruled line
     echo '<div class="ds-hr ds-mar-b-2 ds-col-10"></div>
     ';
 
+    // Alert the user if we cannot find a Sales Manual entry
     if($smfound == false) {
         echo '<h3 class="ds-heading-3">Server not found</h3>
         <div class="ds-pad-b-3">
@@ -88,6 +98,8 @@ if($model && $type) {
                 <li class="ds-flex"><span class="ds-icon-information ds-pad-r-2" role="img" aria-label="Information icon"></span>A link to the sales manual for the server</li>
             </ul>
         </div>';
+
+    // If we can find a Sales Manual entry, show the information
     } else {
         //Section to provide information on important dates
         echo '<h3 class="ds-heading-3">Important Dates</h3>
@@ -95,6 +107,7 @@ if($model && $type) {
         renderDates($dates);
         echo '</div>';
 
+        // Only show performance figures if we have them for this server
         if (count($servers) != 0) {
             // Section to create table of rPerf and CPW figures
             echo '<h3 class="ds-heading-3">Performance Figures</h3>
