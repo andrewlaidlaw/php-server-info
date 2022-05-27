@@ -57,6 +57,8 @@ if($model && $type) {
     // If we can't find the sales manual entry, skip other data lookups
     if($smurl == "Not found") {
         $smfound = false;
+    } else if ($smurl =="Search failed"){
+        $smfound = false;  
     } else {
         $smfound = true;
         // Then use that to get the dates
