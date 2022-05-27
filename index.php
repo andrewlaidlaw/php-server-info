@@ -54,10 +54,13 @@ if($model && $type) {
     $smurl = $smresponse->getBody();
     $generation = parseGeneration($servers[0]->architecture);
 
+    error_log("SMFinder returned URL is:");
+    error_log($smurl);
+
     // If we can't find the sales manual entry, skip other data lookups
     if ($smurl == "Not found") {
         $smfound = false;
-    } elseif ($smurl == "Search failed"){
+    } elseif ($smurl == "Search failed") {
         $smfound = false;  
     } else {
         $smfound = true;
