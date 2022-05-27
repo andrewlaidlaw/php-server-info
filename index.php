@@ -55,9 +55,9 @@ if($model && $type) {
     $generation = parseGeneration($servers[0]->architecture);
 
     // If we can't find the sales manual entry, skip other data lookups
-    if($smurl == "Not found") {
+    if ($smurl == "Not found") {
         $smfound = false;
-    } else if ($smurl =="Search failed"){
+    } elseif ($smurl == "Search failed"){
         $smfound = false;  
     } else {
         $smfound = true;
