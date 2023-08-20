@@ -48,28 +48,40 @@ if($model && $type) {
     $content = $rperfresponse->getBody();
     $servers = json_decode($content, false);
 
-    // Get the sales manual link
-    $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/lookup']);
-    $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
-    $smurl = $smresponse->getBody();
+    // // Get the sales manual link
+    // $smclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smfinder:8080/lookup']);
+    // $smresponse = $smclient->request('GET', '?mtm=' . $modelType);
+    // $smurl = $smresponse->getBody();
     $generation = parseGeneration($servers[0]->architecture);
 
-    error_log("SMFinder returned URL is:");
-    error_log($smurl);
+    // error_log("SMFinder returned URL is:");
+    // error_log($smurl);
 
-    // If we can't find the sales manual entry, skip other data lookups
-    if ($smurl == "Not found") {
-        $smfound = false;
-    } elseif ($smurl == "Search failed") {
-        $smfound = false;  
-    } else {
+    // // If we can't find the sales manual entry, skip other data lookups
+    // if ($smurl == "Not found") {
+    //     $smfound = false;
+    // } elseif ($smurl == "Search failed") {
+    //     $smfound = false;  
+    // } else {
+    //     $smfound = true;
+    //     // Then use that to get the dates
+    //     $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
+    //     $srresponse = $srclient->request('GET', '?url=' . $smurl);
+    //     $srdetails = $srresponse->getBody();
+    //     $dates = json_decode($srdetails,false);
+    // }
+
+    // Get the dates for our server
+    $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://dateslookup:8080/']);
+    $srresponse = $srclient->request('GET', '//json//' . $modelType);
+    $srdetails = $srresponse->getBody();
+    $dates = json_decode($srdetails,false);
+    if ($dates->announce != "") {
         $smfound = true;
-        // Then use that to get the dates
-        $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://smreader:8080/']);
-        $srresponse = $srclient->request('GET', '?url=' . $smurl);
-        $srdetails = $srresponse->getBody();
-        $dates = json_decode($srdetails,false);
+    } else {
+        $smfound = false;
     }
+
     // Now we can render our page
     
     // Simple response
@@ -118,12 +130,16 @@ if($model && $type) {
             ';
         }
 
-        // Section to provide a link to the sales manual
-        echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
-        <div class="ds-pad-b-3">
-        <a href="' . $smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
-        </div>
-        ';
+        // Only provide a link to the sales manual if we have one for this server
+        if ($dates->smurl) {
+            // Section to provide a link to the sales manual
+            echo '<h3 class="ds-heading-3">Sales Manual Link</h3>
+            <div class="ds-pad-b-3">
+            <a href="' . $dates->smurl . '">' . $servers[0]->commonName . ' (' . $modelType .') sales manual</a>
+            </div>
+            ';
+        }
+
     }
 
 // // If we don't have both machine type and model, provide instructions
