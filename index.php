@@ -73,7 +73,7 @@ if($model && $type) {
 
     // Get the dates for our server
     $srclient = new GuzzleHttp\Client([ 'base_uri'=>'http://dateslookup:8080/']);
-    $srresponse = $srclient->request('GET', '//json//' . $modelType);
+    $srresponse = $srclient->request('GET', 'json/' . $modelType);
     $srdetails = $srresponse->getBody();
     $dates = json_decode($srdetails,false);
     if ($dates->announce != "") {
